@@ -2,16 +2,10 @@ import java.util.*;
 
 public class Game {
     private Deque<Player> players; // очередь игроков;
-
-    private Card trump; // козырная карта;
-
     private String gameMode = "1"; // режим игры: однопользовательский - 1 / многопользовательский - 2;
-
     private String gameOption = "1"; // функциональность игры: стандарт - 1 / подкидной - 2 / переводной - 3;
-
     private List<Card> listOfCardsFromAttackPlayers = new ArrayList<>(6); // динимический список, в котором будут отображены карты нападающих игроков;
-
-    private List<Card> listOfCardsFromDefensePlayers = new ArrayList<>(6);
+    private List<Card> listOfCardsFromDefensePlayers = new ArrayList<>(6); // динимический список, в котором будут отображены карты защищающегося игрока;
 
     // общая информация об игре: название, функционал (стандарт / подкидной / переводной) - возможность выбора, кол-во игроков;
     public void info() {
@@ -98,14 +92,10 @@ public class Game {
         cardDesk.show();
 
         // определение козырной карты;
-        trump = cardDesk.getCardList().get(0);
-        System.out.println("\nОпределение козырной карты. Козырная карта: " + trump);
-        cardDesk.getCardList().add(cardDesk.getCardList().get(0));
-        cardDesk.getCardList().remove(0);
-        System.out.print("Состав колоды: ");
-        cardDesk.show();
+        cardDesk.identifyTheTrumpCard();
 
         // определение очередности хода;
+        //d
         int playerIndex = 0; // индекс игрока в очереди, отвечающий за очередность хода;
         Card youngestTrumpCard = new Card(trump.getSuit(), Rank.ACE); // по умолчанию вес самой младшей козырной карты - "А" (туз);
         for (Player player : players) {
@@ -170,12 +160,13 @@ public class Game {
         }
         return 0;
     }
-    public boolean CheckingMove () {
+
+    public boolean CheckingMove() {
 
         return false;
     }
 
-    public void showCardsOnTheTable () {
+    public void showCardsOnTheTable() {
         System.out.println("\nНа игровом поле сейчас: карты игрока, осуществляющего ход: " + listOfCardsFromAttackPlayers + ", карты отбивыющегося игрока: " + listOfCardsFromDefensePlayers);
     }
 }

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Player {
     private int id; // уникальный порядковый идентификатор пользователя
-    private String username; // имя/никнейм пользователя;
+    private String username; // имя / никнейм пользователя;
     private List<Card> cardArrayList = new ArrayList<>(); // набор карт пользователя;
 
     public Player(String username) {
@@ -27,9 +27,20 @@ public class Player {
         }
     }
 
-    public int nextPlayersMove(Deque<Player> players) {
+    public int makeMove(Deque<Player> players) {
         System.out.print("\nИгрок " + players.element().getId() + ", " + players.element() + ", ваша очередность хода. Ваши карты: [");
         players.element().showCardArrayList();
+        System.out.print("Какую карту вы хотите бросить? Введите ее номер: ");
+        Scanner line = new Scanner(System.in);
+        int numberCard = line.nextInt();
+        System.out.println("Игрок " + players.element().getId() + ", " + players.element() + ", бросил карту: [" +
+                players.element().getCardArrayList().get(numberCard - 1) + "]");
+        return numberCard;
+
+
+
+
+
         System.out.print("]. Вы хотите бросить карту? Введите \"1\", если \"Да\", и \"2\", если \"Нет\": ");
         Scanner sc = new Scanner(System.in);
         int answer = sc.nextInt();
@@ -42,7 +53,6 @@ public class Player {
             return numberCard;
         } else {
             System.out.println("\"nИгрок " + players.element().getId() + ", " + players.element() + ", Вы взяли карты.\nВаши карты:");
-            players.element().getCardArrayList().add(listOfCardsFromAttackPlayers);
             players.element().showCardArrayList();
         }
         return 0;
@@ -59,6 +69,8 @@ public class Player {
     }
 
     // подбросить карту на стол;
+
+
     public Card throwACardOnTheTable(int numberCard) {
         return cardArrayList.get(numberCard);
     }

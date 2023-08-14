@@ -14,6 +14,7 @@ public class CardDesk {
             new Card(Suit.CLUBS, Rank.ACE), new Card(Suit.DIAMONDS, Rank.SIX), new Card(Suit.DIAMONDS, Rank.SEVEN), new Card(Suit.DIAMONDS, Rank.EIGHT),
             new Card(Suit.DIAMONDS, Rank.NINE), new Card(Suit.DIAMONDS, Rank.TEN), new Card(Suit.DIAMONDS, Rank.JACK), new Card(Suit.DIAMONDS, Rank.QUEEN),
             new Card(Suit.DIAMONDS, Rank.KING), new Card(Suit.DIAMONDS, Rank.ACE)));
+    private Card trump;
 
     public List<Card> getCardList() {
         return cardList;
@@ -36,6 +37,16 @@ public class CardDesk {
     public void shuffle() {
         System.out.print("\nКолода перемешивается. ");
         Collections.shuffle(cardList);
+        show();
+    }
+
+    public void identifyTheTrumpCard() {
+        // определение козырной карты;
+        trump = cardList.get(0);
+        System.out.println("\nОпределение козырной карты. Козырная карта: " + trump);
+        cardList.add(cardList.get(0));
+        cardList.remove(0);
+        System.out.print("Состав колоды: ");
         show();
     }
 
